@@ -1,15 +1,11 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.NoteBookApplication" parent="Theme.AppCompat.DayNight">
+    <style name="Base.Theme.NoteBookApplication" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionBarTheme">@style/ActionBar</item>
     </style>
 
     <style name="Theme.NoteBookApplication" parent="Base.Theme.NoteBookApplication" />
 
-    <style name="ActionBar" parent="Widget.AppCompat.ActionBar.TabText">
-        <item name="titleTextColor">@color/colorAccent</item>
-    </style>
 </resources>
