@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NoteBook Application</string>
+    <string name="add_new_note">Add New Note</string>
+    <string name="no_notes_available">No Notes Available!</string>
 </resources>
