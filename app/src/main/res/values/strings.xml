@@ -4,4 +4,6 @@
     <string name="no_notes_available">No Notes Available!</string>
     <string name="enter_description_here">Enter description here</string>
     <string name="enter_title_here">Enter title here</string>
+    <string name="search">Search</string>
+    <string name="delete">Delete</string>
 </resources>
