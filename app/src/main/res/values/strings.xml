@@ -2,4 +2,6 @@
     <string name="app_name">NoteBook Application</string>
     <string name="add_new_note">Add New Note</string>
     <string name="no_notes_available">No Notes Available!</string>
+    <string name="enter_description_here">Enter description here</string>
+    <string name="enter_title_here">Enter title here</string>
 </resources>
