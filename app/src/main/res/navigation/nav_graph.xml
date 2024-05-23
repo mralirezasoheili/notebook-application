@@ -9,15 +9,34 @@
         android:id="@+id/homeFragment"
         android:name="ir.alirezasoheili.notebookapplication.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_updateNoteFragment"
+            app:destination="@id/updateNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newNoteFragment"
         android:name="ir.alirezasoheili.notebookapplication.fragments.NewNoteFragment"
         android:label="fragment_new_note"
-        tools:layout="@layout/fragment_new_note" />
+        tools:layout="@layout/fragment_new_note">
+        <action
+            android:id="@+id/action_newNoteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/updateNoteFragment"
         android:name="ir.alirezasoheili.notebookapplication.fragments.UpdateNoteFragment"
         android:label="fragment_update_note"
-        tools:layout="@layout/fragment_update_note" />
+        tools:layout="@layout/fragment_update_note">
+        <action
+            android:id="@+id/action_updateNoteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="note"
+            app:argType="ir.alirezasoheili.notebookapplication.model.Note"
+            app:nullable="true" />
+    </fragment>
 </navigation>
