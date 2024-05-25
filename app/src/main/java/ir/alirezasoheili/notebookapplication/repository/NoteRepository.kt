@@ -20,10 +20,6 @@ class NoteRepository(database: NoteDatabase) {
         dao.delete(note)
     }
 
-    suspend fun deleteAllNotes() {
-        dao.deleteAll()
-    }
-
     fun getAllNotes() = dao.getAllNotes()
 
     fun searchNote(query: String?) = dao.search(query)

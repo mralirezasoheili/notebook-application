@@ -28,10 +28,6 @@ class NoteViewModel(
         }
     }
 
-    fun deleteAllNotes() {
-        viewModelScope.launch { repository.deleteAllNotes() }
-    }
-
     fun getAllNotes() = repository.getAllNotes()
 
     fun searchNote(query: String?) = repository.searchNote(query)
