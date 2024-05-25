@@ -1,9 +1,12 @@
 package ir.alirezasoheili.notebookapplication.repository
 
 import ir.alirezasoheili.notebookapplication.database.NoteDao
+import ir.alirezasoheili.notebookapplication.database.NoteDatabase
 import ir.alirezasoheili.notebookapplication.model.Note
 
-class NoteRepository(private val dao: NoteDao) {
+class NoteRepository(database: NoteDatabase) {
+
+    private val dao: NoteDao = database.getNoteDao()
 
     suspend fun insertNote(note: Note) {
         dao.insert(note)
