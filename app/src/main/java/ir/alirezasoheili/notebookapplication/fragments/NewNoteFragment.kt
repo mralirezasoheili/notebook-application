@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import ir.alirezasoheili.notebookapplication.MainActivity
 import ir.alirezasoheili.notebookapplication.R
-import ir.alirezasoheili.notebookapplication.adapter.NoteAdapter
 import ir.alirezasoheili.notebookapplication.databinding.FragmentNewNoteBinding
 import ir.alirezasoheili.notebookapplication.model.Note
 import ir.alirezasoheili.notebookapplication.viewmodel.NoteViewModel
@@ -21,7 +20,6 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
 
     private lateinit var noteViewModel: NoteViewModel
 
-    private lateinit var noteAdapter: NoteAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
