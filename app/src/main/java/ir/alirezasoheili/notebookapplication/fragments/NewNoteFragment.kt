@@ -66,4 +66,9 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
             false
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
