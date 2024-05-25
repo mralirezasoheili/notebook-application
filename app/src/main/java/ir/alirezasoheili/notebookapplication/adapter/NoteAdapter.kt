@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.alirezasoheili.notebookapplication.databinding.NoteItemBinding
 import ir.alirezasoheili.notebookapplication.fragments.HomeFragmentDirections
 import ir.alirezasoheili.notebookapplication.model.Note
-import java.util.Random
+import kotlin.random.Random
+
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
     class ViewHolder(val noteItemBinding: NoteItemBinding) :
@@ -52,9 +53,8 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
     }
 
     private fun getRandomColor(): Int {
-        val random = Random()
         return Color.argb(
-            255, random.nextInt(256), random.nextInt(256), random.nextInt(256)
+            255, Random.nextInt(256), Random.nextInt(256), Random.nextInt(256)
         )
     }
 }
