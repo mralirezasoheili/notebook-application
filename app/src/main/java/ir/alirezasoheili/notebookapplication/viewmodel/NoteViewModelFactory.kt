@@ -13,6 +13,6 @@ class NoteViewModelFactory(
         if (modelClass.isAssignableFrom(NoteViewModel::class.java)) {
             return NoteViewModel(application, repository) as T
         }
-        throw IllegalArgumentException("")
+        throw IllegalArgumentException("Unknown ViewModel Class!")
     }
 }
