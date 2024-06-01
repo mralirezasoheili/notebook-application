@@ -58,7 +58,7 @@ dependencies {
     // ROOM
     implementation(libs.androidx.room.runtime)
     // To use Kotlin annotation processing tool (kapt)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.room.ktx)
@@ -71,4 +71,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     // Annotation processor
     kapt(libs.androidx.lifecycle.compiler)
+    // RecyclerView Animator
+    implementation(libs.recyclerview.animators)
 }
