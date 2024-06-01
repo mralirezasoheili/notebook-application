@@ -46,19 +46,6 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         currentNote = args.note!!
 
         initialEditTexts()
-
-        binding.fabUpdateNote.setOnClickListener {
-            if (updateNote()) {
-                Toast.makeText(
-                    it.context, "Note Updated Successfully.", Toast.LENGTH_SHORT
-                ).show()
-                backToHomeFragment(it)
-            } else {
-                Toast.makeText(
-                    it.context, "Please Enter Note Title First!", Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
     }
 
     private fun setUpMenu() {
@@ -76,15 +63,31 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
                 when (menuItem.itemId) {
                     android.R.id.home -> {
                         requireActivity().onBackPressedDispatcher.onBackPressed()
-                        return true
+                    }
+
+                    R.id.menu_update -> {
+                        updateNote()
                     }
 
                     R.id.menu_delete -> {
                         deleteNote()
                     }
                 }
-                return false
+                return true
             }
+        }
+    }
+
+    private fun updateNote() {
+        if (saveData()) {
+            Toast.makeText(
+                activity, "Note Updated Successfully.", Toast.LENGTH_SHORT
+            ).show()
+            backToHomeFragment(requireView())
+        } else {
+            Toast.makeText(
+                activity, "Please Enter Note Title First!", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -99,7 +102,7 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         binding.etNoteBody.setText(currentNote.body)
     }
 
-    private fun updateNote(): Boolean {
+    private fun saveData(): Boolean {
         val noteTitle = binding.etNoteTitle.text.toString().trim()
         val noteBody = binding.etNoteBody.text.toString().trim()
         return if (noteTitle.isNotEmpty()) {

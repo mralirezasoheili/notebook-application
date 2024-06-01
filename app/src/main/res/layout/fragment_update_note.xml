@@ -8,79 +8,54 @@
         android:layout_height="match_parent"
         tools:context=".fragments.UpdateNoteFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="15dp"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="8sp">
+                android:layout_height="match_parent">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etNoteTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorAccent"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/custom_input"
+                    android:hint="@string/enter_title_here"
+                    android:padding="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/etNoteTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="username"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:hint="@string/enter_title_here"
-                        android:inputType="text"
-                        android:padding="15dp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/etNoteBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/custom_input"
+                    android:gravity="top|start"
+                    android:hint="@string/enter_description_here"
+                    android:inputType="textMultiLine"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etNoteTitle" />
 
-                    <EditText
-                        android:id="@+id/etNoteBody"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="15dp"
-                        android:autofillHints="username"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:gravity="start|top"
-                        android:hint="@string/enter_description_here"
-                        android:inputType="textMultiLine"
-                        android:padding="15dp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimary"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabUpdateNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:clickable="true"
-            android:contentDescription="@string/add_new_note"
-            android:focusable="true"
-            android:tintMode="@color/colorAccent"
-            app:backgroundTint="@color/colorPrimary"
-            app:borderWidth="0dp"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_done" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

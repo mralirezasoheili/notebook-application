@@ -2,10 +2,16 @@ package ir.alirezasoheili.notebookapplication.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import ir.alirezasoheili.notebookapplication.MainActivity
 import ir.alirezasoheili.notebookapplication.R
@@ -31,19 +37,45 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         noteViewModel = (activity as MainActivity).noteViewModel
+        setUpMenu()
+    }
 
-        // add click listener to floating action button
-        binding.fabSaveNote.setOnClickListener {
-            if (saveNote()) {
-                Toast.makeText(
-                    it.context, "Note Saved Successfully.", Toast.LENGTH_SHORT
-                ).show()
-                backToHomeFragment(it)
-            } else {
-                Toast.makeText(
-                    it.context, "Please Enter Note Title First!", Toast.LENGTH_SHORT
-                ).show()
+    private fun setUpMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(getMenuProvider(), viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun getMenuProvider(): MenuProvider {
+        return object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_add_note, menu)
             }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    android.R.id.home -> {
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
+
+                    R.id.menu_add -> {
+                        addNote()
+                    }
+                }
+                return true
+            }
+        }
+    }
+
+    private fun addNote() {
+        if (saveNote()) {
+            Toast.makeText(
+                activity, "Note Saved Successfully.", Toast.LENGTH_SHORT
+            ).show()
+            backToHomeFragment(requireView())
+        } else {
+            Toast.makeText(
+                activity, "Please Enter Note Title First!", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
