@@ -24,7 +24,7 @@ import ir.alirezasoheili.notebookapplication.adapter.NoteAdapter
 import ir.alirezasoheili.notebookapplication.databinding.FragmentHomeBinding
 import ir.alirezasoheili.notebookapplication.model.Note
 import ir.alirezasoheili.notebookapplication.viewmodel.NoteViewModel
-import jp.wasabeef.recyclerview.animators.LandingAnimator
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -34,6 +34,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var noteViewModel: NoteViewModel
 
     private lateinit var noteAdapter: NoteAdapter
+
+    private var isGridView = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -46,6 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         noteViewModel = (activity as MainActivity).noteViewModel
+        binding.lifecycleOwner = this
         setUpRecyclerView()
 
         // add click listener to floating action button
@@ -82,6 +85,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                     R.id.menu_delete_all -> {
                         deleteAllNotes()
+                    }
+
+                    R.id.view_grid_or_list -> {
+                        isGridView = !isGridView
+                        menuItem.title = if (isGridView) {
+                            getString(R.string.view_as_list)
+                        } else {
+                            getString(R.string.view_as_grid)
+                        }
+                        setLayoutManager()
                     }
                 }
                 return false
@@ -132,18 +145,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setUpRecyclerView() {
         noteAdapter = NoteAdapter()
-        binding.recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(
-                1, StaggeredGridLayoutManager.VERTICAL
-            )
+        val recyclerView = binding.recyclerView
+        recyclerView.apply {
+            setLayoutManager()
             setHasFixedSize(true)
             adapter = noteAdapter
-
             // Animation for recycler view
-            itemAnimator = LandingAnimator().apply {
+            recyclerView.itemAnimator = FadeInUpAnimator().apply {
                 addDuration = 300
             }
-
             // swipe to delete
             swipeToDelete(binding.recyclerView)
         }
@@ -151,8 +161,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             noteViewModel.getAllNotes().observe(viewLifecycleOwner) { note ->
                 noteAdapter.differ.submitList(note)
                 updateUI(note)
+                binding.recyclerView.scheduleLayoutAnimation()
             }
         }
+    }
+
+    private fun setLayoutManager() {
+        val spanCount = if (isGridView) {
+            2
+        } else {
+            1
+        }
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(
+            spanCount, StaggeredGridLayoutManager.VERTICAL
+        )
     }
 
     private fun swipeToDelete(recyclerView: RecyclerView) {

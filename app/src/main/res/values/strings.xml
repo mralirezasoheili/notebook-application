@@ -8,4 +8,6 @@
     <string name="delete">Delete</string>
     <string name="update">Update</string>
     <string name="delete_all">Delete All</string>
+    <string name="view_as_grid">View As Grid</string>
+    <string name="view_as_list">View As List</string>
 </resources>
