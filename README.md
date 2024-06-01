@@ -8,7 +8,7 @@
     <br />
     <br />
     <br />
-    <a href="https://github.com/mralirezasoheili/notebook-application/blob/master/art/shot1.png">View Demo</a>
+    <a href="https://github.com/mralirezasoheili/notebook-application/blob/master/art/screenshot1.png">View Demo</a>
     ·
     <a href="https://github.com/mralirezasoheili/notebook-application/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
@@ -24,9 +24,9 @@
 </p>
 
 <div align="center">
-<img src="https://github.com/mralirezasoheili/notebook-application/blob/master/art/shot1.png" alt="first screen shot from the application" width="300" /> &emsp;
-<img src="https://github.com/mralirezasoheili/notebook-application/blob/master/art/shot2.png" alt="second screen shot from the application" width="300" /> &emsp;
-  <img src="https://github.com/mralirezasoheili/notebook-application/blob/master/art/shot3.png" alt="third screen shot from the application" width="300" />
+<img src="https://github.com/mralirezasoheili/notebook-application/blob/master/art/screenshot1.png" alt="first screen shot from the application" width="300" /> &emsp;
+<img src="https://github.com/mralirezasoheili/notebook-application/blob/master/art/screenshot2.png" alt="second screen shot from the application" width="300" /> &emsp;
+  <img src="https://github.com/mralirezasoheili/notebook-application/blob/master/art/screenshot3.png" alt="third screen shot from the application" width="300" />
 </div>
 
 ### The following topics are utilized in this amazing program:
