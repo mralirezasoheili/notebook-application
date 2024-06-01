@@ -1,4 +1,4 @@
-package ir.alirezasoheili.notebookapplication.fragments
+package ir.alirezasoheili.notebookapplication.fragments.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,10 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import ir.alirezasoheili.notebookapplication.MainActivity
 import ir.alirezasoheili.notebookapplication.R
 import ir.alirezasoheili.notebookapplication.adapter.NoteAdapter
@@ -116,6 +119,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             )
             setHasFixedSize(true)
             adapter = noteAdapter
+
+            // swipe to delete
+            swipeToDelete(binding.recyclerView)
         }
         activity?.let {
             noteViewModel.getAllNotes().observe(viewLifecycleOwner) { note ->
@@ -123,6 +129,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 updateUI(note)
             }
         }
+    }
+
+    private fun swipeToDelete(recyclerView: RecyclerView) {
+        val swipeToDeleteCallback = object : SwipeToDelete() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val deletedNote = noteAdapter.differ.currentList[viewHolder.adapterPosition]
+                // Delete Note
+                noteViewModel.deleteNote(deletedNote)
+                // Restore Deleted Note
+                restoreDeletedNote(viewHolder.itemView, deletedNote, viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    private fun restoreDeletedNote(view: View, deletedNote: Note, position: Int) {
+        val snackBar = Snackbar.make(view, "Deleted ${deletedNote.title}", Snackbar.LENGTH_LONG)
+        snackBar.setAction("Undo") {
+            noteViewModel.addNote(deletedNote)
+            noteAdapter.notifyItemChanged(position)
+        }
+        snackBar.show()
     }
 
     private fun updateUI(note: List<Note>?) {
