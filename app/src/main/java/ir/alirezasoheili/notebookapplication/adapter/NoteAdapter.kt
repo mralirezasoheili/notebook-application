@@ -1,16 +1,14 @@
 package ir.alirezasoheili.notebookapplication.adapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ir.alirezasoheili.notebookapplication.databinding.NoteItemBinding
-import ir.alirezasoheili.notebookapplication.fragments.HomeFragmentDirections
+import ir.alirezasoheili.notebookapplication.fragments.home.HomeFragmentDirections
 import ir.alirezasoheili.notebookapplication.model.Note
 import kotlin.random.Random
 

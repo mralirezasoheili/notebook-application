@@ -1,6 +1,5 @@
-package ir.alirezasoheili.notebookapplication.fragments
+package ir.alirezasoheili.notebookapplication.fragments.add
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -14,38 +13,31 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import ir.alirezasoheili.notebookapplication.MainActivity
 import ir.alirezasoheili.notebookapplication.R
-import ir.alirezasoheili.notebookapplication.databinding.FragmentUpdateNoteBinding
+import ir.alirezasoheili.notebookapplication.databinding.FragmentNewNoteBinding
 import ir.alirezasoheili.notebookapplication.model.Note
 import ir.alirezasoheili.notebookapplication.viewmodel.NoteViewModel
 
-class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
-    private var _binding: FragmentUpdateNoteBinding? = null
+class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
+
+    private var _binding: FragmentNewNoteBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var noteViewModel: NoteViewModel
-
-    private lateinit var currentNote: Note
-
-    private val args: UpdateNoteFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentUpdateNoteBinding.inflate(inflater, container, false)
+        _binding = FragmentNewNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpMenu()
         noteViewModel = (activity as MainActivity).noteViewModel
-        currentNote = args.note!!
-
-        initialEditTexts()
+        setUpMenu()
     }
 
     private fun setUpMenu() {
@@ -56,7 +48,7 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     private fun getMenuProvider(): MenuProvider {
         return object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_update_note, menu)
+                menuInflater.inflate(R.menu.menu_add_note, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -65,12 +57,8 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
                         requireActivity().onBackPressedDispatcher.onBackPressed()
                     }
 
-                    R.id.menu_update -> {
-                        updateNote()
-                    }
-
-                    R.id.menu_delete -> {
-                        deleteNote()
+                    R.id.menu_add -> {
+                        addNote()
                     }
                 }
                 return true
@@ -78,10 +66,10 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         }
     }
 
-    private fun updateNote() {
-        if (saveData()) {
+    private fun addNote() {
+        if (saveNote()) {
             Toast.makeText(
-                activity, "Note Updated Successfully.", Toast.LENGTH_SHORT
+                activity, "Note Saved Successfully.", Toast.LENGTH_SHORT
             ).show()
             backToHomeFragment(requireView())
         } else {
@@ -93,36 +81,20 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
 
     private fun backToHomeFragment(view: View) {
         view.findNavController().navigate(
-            R.id.action_updateNoteFragment_to_homeFragment
+            R.id.action_newNoteFragment_to_homeFragment
         )
     }
 
-    private fun initialEditTexts() {
-        binding.etNoteTitle.setText(currentNote.title)
-        binding.etNoteBody.setText(currentNote.body)
-    }
-
-    private fun saveData(): Boolean {
+    private fun saveNote(): Boolean {
         val noteTitle = binding.etNoteTitle.text.toString().trim()
         val noteBody = binding.etNoteBody.text.toString().trim()
+
         return if (noteTitle.isNotEmpty()) {
-            noteViewModel.updateNote(Note(currentNote.id, noteTitle, noteBody))
+            noteViewModel.addNote(Note(0, noteTitle, noteBody))
             true
         } else {
             false
         }
-    }
-
-    private fun deleteNote() {
-        AlertDialog.Builder(activity).apply {
-            setTitle("Delete Note")
-            setMessage("Are you sure want to delete this note?")
-            setPositiveButton("Delete") { _, _ ->
-                noteViewModel.deleteNote(currentNote)
-                backToHomeFragment(requireView())
-            }
-            setNegativeButton("Cancel", null)
-        }.create().show()
     }
 
     override fun onDestroy() {

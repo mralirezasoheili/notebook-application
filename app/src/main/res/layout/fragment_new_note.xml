@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.NewNoteFragment">
+        tools:context=".fragments.add.NewNoteFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
