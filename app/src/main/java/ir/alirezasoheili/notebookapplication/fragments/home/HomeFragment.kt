@@ -1,5 +1,6 @@
 package ir.alirezasoheili.notebookapplication.fragments.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -23,6 +24,7 @@ import ir.alirezasoheili.notebookapplication.adapter.NoteAdapter
 import ir.alirezasoheili.notebookapplication.databinding.FragmentHomeBinding
 import ir.alirezasoheili.notebookapplication.model.Note
 import ir.alirezasoheili.notebookapplication.viewmodel.NoteViewModel
+import jp.wasabeef.recyclerview.animators.LandingAnimator
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -48,12 +50,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // add click listener to floating action button
         binding.fabAddNote.setOnClickListener {
-            it.findNavController().navigate(
-                R.id.action_homeFragment_to_newNoteFragment
-            )
+            goToNewNoteFragment(it)
         }
 
         setUpMenu()
+    }
+
+    private fun goToNewNoteFragment(view: View) {
+        view.findNavController().navigate(
+            R.id.action_homeFragment_to_newNoteFragment
+        )
     }
 
     private fun setUpMenu() {
@@ -72,12 +78,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 when (menuItem.itemId) {
                     android.R.id.home -> {
                         requireActivity().onBackPressedDispatcher.onBackPressed()
-                        return true
+                    }
+
+                    R.id.menu_delete_all -> {
+                        deleteAllNotes()
                     }
                 }
                 return false
             }
         }
+    }
+
+    private fun deleteAllNotes() {
+        AlertDialog.Builder(activity).apply {
+            setTitle("Delete All Notes")
+            setMessage("Are you sure want to delete All notes?")
+            setPositiveButton("Delete") { _, _ ->
+                noteViewModel.deleteAll()
+            }
+            setNegativeButton("Cancel", null)
+        }.create().show()
     }
 
     private fun setUpSearchView(menu: Menu) {
@@ -90,7 +110,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun getQueryTextListener(): SearchView.OnQueryTextListener {
         return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-//                searchNote(query)
                 return false
             }
 
@@ -119,6 +138,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             )
             setHasFixedSize(true)
             adapter = noteAdapter
+
+            // Animation for recycler view
+            itemAnimator = LandingAnimator().apply {
+                addDuration = 300
+            }
 
             // swipe to delete
             swipeToDelete(binding.recyclerView)
