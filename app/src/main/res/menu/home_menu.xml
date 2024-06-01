@@ -7,4 +7,7 @@
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
+    <item
+        android:id="@+id/menu_delete_all"
+        android:title="@string/delete_all" />
 </menu>
