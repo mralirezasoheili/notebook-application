@@ -33,31 +33,39 @@
 
                     <TextView
                         android:id="@+id/tvNoteTitle"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="200"
+                        android:ellipsize="end"
                         android:maxLength="20"
+                        android:maxLines="1"
                         android:text="@string/app_name"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <View
                         android:id="@+id/ibColor"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorPrimaryDark" />
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"/>
                 </LinearLayout>
+
+                <ViewAnimator
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray" />
 
                 <TextView
                     android:id="@+id/tvNoteBody"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
+                    android:ellipsize="end"
                     android:maxHeight="170dp"
+                    android:maxLength="300"
+                    android:maxLines="3"
                     android:text="@string/app_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
