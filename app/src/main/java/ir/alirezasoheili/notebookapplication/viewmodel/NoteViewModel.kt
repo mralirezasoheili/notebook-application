@@ -32,5 +32,7 @@ class NoteViewModel(
 
     fun searchNote(query: String?) = repository.searchNote(query)
 
-
+    fun deleteAll() {
+        viewModelScope.launch { repository.deleteAll() }
+    }
 }

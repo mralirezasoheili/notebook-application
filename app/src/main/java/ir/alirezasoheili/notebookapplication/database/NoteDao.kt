@@ -25,4 +25,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM notes_tbl WHERE note_title LIKE '%' || :query || '%' OR note_body LIKE '%' || :query || '%' ORDER BY note_id DESC")
     fun search(query: String?): LiveData<List<Note>>
+
+    @Query("Delete From notes_tbl")
+    suspend fun deleteAll()
 }
