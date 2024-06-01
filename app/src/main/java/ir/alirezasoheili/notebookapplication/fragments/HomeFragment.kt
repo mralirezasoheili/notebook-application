@@ -112,7 +112,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         noteAdapter = NoteAdapter()
         binding.recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.VERTICAL
+                1, StaggeredGridLayoutManager.VERTICAL
             )
             setHasFixedSize(true)
             adapter = noteAdapter
