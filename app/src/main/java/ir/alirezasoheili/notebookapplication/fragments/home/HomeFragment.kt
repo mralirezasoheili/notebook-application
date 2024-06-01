@@ -24,7 +24,6 @@ import ir.alirezasoheili.notebookapplication.adapter.NoteAdapter
 import ir.alirezasoheili.notebookapplication.databinding.FragmentHomeBinding
 import ir.alirezasoheili.notebookapplication.model.Note
 import ir.alirezasoheili.notebookapplication.viewmodel.NoteViewModel
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -151,9 +150,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             setHasFixedSize(true)
             adapter = noteAdapter
             // Animation for recycler view
-            recyclerView.itemAnimator = FadeInUpAnimator().apply {
-                addDuration = 300
-            }
+//            recyclerView.itemAnimator = FadeInUpAnimator().apply {
+//                addDuration = 300
+//            }
             // swipe to delete
             swipeToDelete(binding.recyclerView)
         }

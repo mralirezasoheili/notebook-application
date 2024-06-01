@@ -71,6 +71,4 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     // Annotation processor
     kapt(libs.androidx.lifecycle.compiler)
-    // RecyclerView Animator
-    implementation(libs.recyclerview.animators)
 }
